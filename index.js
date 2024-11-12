@@ -1,7 +1,7 @@
 const products = require("./products.json")
 const express = require("express")
 const app = express()
-const PORT = 5200
+const PORT = 4500
 
 // console.log(products)
 // Add a middleware to parse all request body
@@ -61,9 +61,31 @@ app.get("/api/products/:category", function (request, response) {
   const productsInACategory = products.filter(function (product) {
     return product.category === categoryName
   })
+ //functtion for retrieval of non exixting category
+ // Check if there are no products in the specified category
+
+
+ /*if (productsInACategory.length === 0) 
+  {
+    return response.status(404).json({ 
+    error: true,
+    message: "we do not have such product check back again"})
+  }*/
+
+
+ if (productsInACategory.length === 0) {
+  return response.status(404).json({
+    error: true,
+    message: "category not found"
+  })
+  
+ }else return response.status(201).json(productsInACategory)
+
   response.status(200).json(productsInACategory)
 })
 
 app.listen(PORT, function () {
   console.log(`App server has started on http://localhost:${PORT}`)
 })
+
+console.log(products)
