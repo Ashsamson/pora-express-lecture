@@ -65,13 +65,6 @@ app.get("/api/products/:category", function (request, response) {
  // Check if there are no products in the specified category
 
 
- /*if (productsInACategory.length === 0) 
-  {
-    return response.status(404).json({ 
-    error: true,
-    message: "we do not have such product check back again"})
-  }*/
-
 
  if (productsInACategory.length === 0) {
   return response.status(404).json({
